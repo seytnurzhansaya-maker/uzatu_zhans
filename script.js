@@ -609,27 +609,31 @@ alert("Аты-жөніңізді енгізіңіз / Введите имя");
 return;
 
 }
+async function sendForm(event) {
+  event.preventDefault();
 
-/* =====================================
-   ПОКА ПРОСТО ВЫВОДИМ
-===================================== */
+  const form = document.querySelector("form");
 
-  await fetch("https://script.google.com/macros/s/AKfycbzP3XMzIsGupRJI2C1riv0EK_sSWCCm12BB9zwfFrCPAa0DoJNED0R8UfK6O2pEvDFnCA/exec", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-});
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbxV54lW7wN2nCzukuAckcUapW6aUG3GBB-b_RWZu9jxmbj3upjNRxINcDUDVUOpxvZTCA/exec", {
+      method: "POST",
+      mode: "no-cors",
+      body: new FormData(form)
+    });
 
-guestForm.reset();
+    // успех (даже если no-cors — мы считаем что отправилось)
+    form.reset();
 
-guestForm.guests.value = 1;
+    if (form.guests) form.guests.value = 1;
 
-successModal.style.display = "flex";
+    successModal.style.display = "flex";
+    document.body.style.overflow = "hidden";
 
-document.body.style.overflow = "hidden";
-
+  } catch (error) {
+    console.error("Ошибка отправки:", error);
+    alert("Ошибка отправки. Попробуй ещё раз.");
+  }
+}
 /* =====================================
    ДАЛЬШЕ ЗДЕСЬ БУДЕТ
    GOOGLE SHEETS
