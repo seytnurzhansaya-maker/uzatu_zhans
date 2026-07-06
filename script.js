@@ -626,8 +626,6 @@ try {
 
 guestForm.reset();
 
-guestForm.guests.value = 1;
-
 /* показываем окно */
 
 successModal.style.display = "flex";
