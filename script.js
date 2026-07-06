@@ -609,12 +609,19 @@ alert("Аты-жөніңізді енгізіңіз / Введите имя");
 return;
 
 }
-/* =====================================
-   ДАЛЬШЕ ЗДЕСЬ БУДЕТ
-   GOOGLE SHEETS
-===================================== */
-
-/* очищаем форму */
+try {
+  await fetch("https://script.google.com/macros/s/AKfycbxV54lW7wN2nCzukuAckcUapW6aUG3GBB-b_RWZu9jxmbj3upjNRxINcDUDVUOpxvZTCA/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  });
+} catch (error) {
+  console.error("Ошибка отправки:", error);
+  alert("Ошибка отправки данных.");
+  return;
+}
 
 guestForm.reset();
 
