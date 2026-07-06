@@ -609,31 +609,6 @@ alert("Аты-жөніңізді енгізіңіз / Введите имя");
 return;
 
 }
-async function sendForm(event) {
-  event.preventDefault();
-
-  const form = document.querySelector("form");
-
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbxV54lW7wN2nCzukuAckcUapW6aUG3GBB-b_RWZu9jxmbj3upjNRxINcDUDVUOpxvZTCA/exec", {
-      method: "POST",
-      mode: "no-cors",
-      body: new FormData(form)
-    });
-
-    // успех (даже если no-cors — мы считаем что отправилось)
-    form.reset();
-
-    if (form.guests) form.guests.value = 1;
-
-    successModal.style.display = "flex";
-    document.body.style.overflow = "hidden";
-
-  } catch (error) {
-    console.error("Ошибка отправки:", error);
-    alert("Ошибка отправки. Попробуй ещё раз.");
-  }
-}
 /* =====================================
    ДАЛЬШЕ ЗДЕСЬ БУДЕТ
    GOOGLE SHEETS
